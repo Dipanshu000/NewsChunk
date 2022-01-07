@@ -1,8 +1,10 @@
 package com.example.newschunk
 
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.AuthFailureError
@@ -10,6 +12,7 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import kotlinx.android.synthetic.main.activity_main.*
+import org.json.JSONObject
 
 class MainActivity : AppCompatActivity(), NewsItemClicked {
 
@@ -56,6 +59,8 @@ class MainActivity : AppCompatActivity(), NewsItemClicked {
     }
 
     override fun onItemClicked(item: News) {
-
+        val builder = CustomTabsIntent.Builder();
+        val customTabsIntent = builder.build();
+        customTabsIntent.launchUrl(this, Uri.parse(item.url));
     }
 }

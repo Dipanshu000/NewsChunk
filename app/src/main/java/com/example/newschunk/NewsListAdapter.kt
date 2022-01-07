@@ -3,8 +3,10 @@ package com.example.newschunk
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 class NewsListAdapter(private val listener: NewsItemClicked): RecyclerView.Adapter<NewsViewHolder>() {
 
@@ -22,6 +24,8 @@ class NewsListAdapter(private val listener: NewsItemClicked): RecyclerView.Adapt
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         val currentItem = items[position]
         holder.titleView.text = currentItem.title
+        holder.author.text = currentItem.author
+        Glide.with(holder.itemView.context).load(currentItem.imageUrl).into(holder.image)
     }
 
     fun updateNews(updateNews: ArrayList<News>){
@@ -39,6 +43,8 @@ class NewsListAdapter(private val listener: NewsItemClicked): RecyclerView.Adapt
 
 class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
     val titleView: TextView = itemView.findViewById(R.id.title)
+    val image: ImageView = itemView.findViewById(R.id.image)
+    val author: TextView = itemView.findViewById(R.id.author)
 }
 
 interface NewsItemClicked {
